@@ -42,5 +42,33 @@ namespace ProyectoEjemplo.Repositories
 
             return result;
         }
+
+        public async Task<UserInfoDto> Update(int userId, UserDto userDto)
+        {
+            var user = await this._context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+
+            //Versión 1
+            //var model = this._mapper.Map<User>(userDto);
+
+            //this._context.Entry(user).CurrentValues.SetValues(userDto);
+            //this._context.Users.Update(user);
+
+            //await this._context.SaveChangesAsync();
+
+            //return this._mapper.Map<UserInfoDto>(user);
+
+            //Versión 2
+            this._context.Entry<User>(user).State = EntityState.Detached;
+
+            var model = this._mapper.Map<User>(userDto);
+            this._context.Update(model);
+
+            return this._mapper.Map<UserInfoDto>(model);
+        }
     }
 }
