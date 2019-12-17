@@ -20,6 +20,10 @@ namespace ProyectoEjemplo.Helpers
 
             CreateMap<UserProfileDto, UserProfile>();
             CreateMap<UserProfile, UserProfileDto>();
+
+            // Mapeo en ambas direcciones :^)
+            CreateMap<FollowerDto, Follower>().ReverseMap();
+            CreateMap<Follower, FollowerInfoDto>();
         }
     }
 }

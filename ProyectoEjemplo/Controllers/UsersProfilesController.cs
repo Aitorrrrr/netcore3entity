@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoEjemplo.Data.Dto;
-using ProyectoEjemplo.Data.Models;
 using ProyectoEjemplo.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ProyectoEjemplo.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProyectoEjemplo.Registers
 {
@@ -12,8 +8,8 @@ namespace ProyectoEjemplo.Registers
         public static IServiceCollection addCustomRegisters(this IServiceCollection services)
         {
             //services.AddTransient(typeof(UserRepository));
-            //services.AddTransient(typeof(UserProfileRepository));
             //services.AddTransient<UserRepository>();
+            //services.AddTransient(typeof(UserProfileRepository));
 
             var allProviderTypes = System.Reflection.Assembly.GetExecutingAssembly()
                                                              .GetTypes()

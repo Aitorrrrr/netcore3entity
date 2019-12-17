@@ -24,5 +24,9 @@ namespace ProyectoEjemplo.Data.Models
         public string Email { get; set; }
 
         public virtual UserProfile Perfil { get; set; }
+
+        public virtual IEnumerable<Follower> UsuariosSeguidos { get; set; }
+
+        public virtual IEnumerable<Follower> UsuariosMeSiguen { get; set; }
     }
 }

@@ -5,7 +5,6 @@ using ProyectoEjemplo.Data.Dto;
 using ProyectoEjemplo.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProyectoEjemplo.Repositories

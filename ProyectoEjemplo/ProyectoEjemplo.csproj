@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20191217145828_relacion1_1.Designer.cs" />
     <Compile Remove="Migrations\20191217150357_initialMigration.cs" />
     <Compile Remove="Migrations\20191217150357_initialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20191217175545_relationNM.cs" />
+    <Compile Remove="Migrations\20191217175545_relationNM.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
