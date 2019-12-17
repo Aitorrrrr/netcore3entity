@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoEjemplo.Data.Dto;
 using ProyectoEjemplo.Data.Models;
 using ProyectoEjemplo.Repositories;
 using System.Collections.Generic;
@@ -18,14 +19,14 @@ namespace ProyectoEjemplo.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserProfile>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UserProfileDto>>> GetAll()
         {
             return Ok(await _userProfileRepository.GetAll());
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetById(int id)
+        public async Task<ActionResult<UserProfileDto>> GetById(int id)
         {
             return Ok(await _userProfileRepository.GetById(id));
         }

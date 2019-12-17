@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoEjemplo.Data;
+using ProyectoEjemplo.Data.Dto;
 using ProyectoEjemplo.Data.Models;
 using ProyectoEjemplo.Repositories;
 
@@ -52,14 +54,14 @@ namespace ProyectoEjemplo.Controllers
         ///
         /// </remarks>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserInfoDto>>> GetUsers()
         {
             return Ok(await _userRepository.GetAll());
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserInfoDto>> GetUser(int id)
         {
             return Ok(await _userRepository.GetById(id));
         }

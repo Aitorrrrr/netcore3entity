@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProyectoEjemplo.Data;
+using ProyectoEjemplo.Helpers;
+using ProyectoEjemplo.Registers;
 using ProyectoEjemplo.Repositories;
 
 namespace ProyectoEjemplo
@@ -43,35 +46,16 @@ namespace ProyectoEjemplo
                     options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Local;
                 });
 
-            services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo 
-                    { 
-                        Title = "API proyecto ejemplo", 
-                        Version = "v1.0", 
-                        Description = "Random API",
-                        TermsOfService = new Uri("https://example.com/terms"),
-                        Contact = new OpenApiContact
-                        {
-                            Name = "Max Power",
-                            Email = string.Empty,
-                            Url = new Uri("https://twitter.com/maxpower"),
-                        },
-                        License = new OpenApiLicense
-                        {
-                            Name = "Use under LICX",
-                            Url = new Uri("https://example.com/license"),
-                        }
-                    });
+            services.addCustomRegisters();
+            services.addSwaggersRegisters();
 
-                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                    c.IncludeXmlComments(xmlPath);
-                });
+            var mappingConfig = new MapperConfiguration(opt =>
+            {
+                opt.AddProfile(new MappingProfile());
+            });
 
-            services.AddTransient(typeof(UserRepository));
-            services.AddTransient(typeof(UserProfileRepository));
-            //services.AddTransient<UserRepository>();
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
