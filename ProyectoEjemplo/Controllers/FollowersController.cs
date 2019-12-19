@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoEjemplo.Data.Dto;
 using ProyectoEjemplo.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProyectoEjemplo.Controllers

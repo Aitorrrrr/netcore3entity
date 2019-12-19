@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProyectoEjemplo.Data.Configurations;
 using ProyectoEjemplo.Data.Models;
 
 namespace ProyectoEjemplo.Data
@@ -8,6 +9,7 @@ namespace ProyectoEjemplo.Data
         public DbSet<User> Users { get; set; }
         public DbSet<UserProfile> UsersProfiles { get; set; }
         public DbSet<Follower> Followers { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
@@ -17,23 +19,13 @@ namespace ProyectoEjemplo.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Con assemblys de nuevo las aplicamos
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+
             modelBuilder.Entity<Follower>(ent =>
             {
                 ent.ToTable("Followers")
                     .HasKey(x => new { x.UserId, x.FollowerId });
-            });
-
-            modelBuilder.Entity<User>(ent =>
-            {
-                ent.HasMany(x => x.UsuariosSeguidos)
-                   .WithOne(x => x.UsuarioSigue)
-                   .HasForeignKey(x => x.UserId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
-                ent.HasMany(x => x.UsuariosMeSiguen)
-                   .WithOne(x => x.UsuarioSeguido)
-                   .HasForeignKey(x => x.FollowerId)
-                   .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }
